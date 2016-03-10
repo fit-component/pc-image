@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import classnames from 'classnames'
+import classNames from 'classnames'
 
 export default class Image extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             imageLoaded: false,
@@ -12,7 +12,7 @@ export default class Image extends React.Component {
         }
     }
 
-    onImageLoad (e) {
+    onImageLoad(e) {
         let image = e.target
 
         this.setState({
@@ -22,20 +22,21 @@ export default class Image extends React.Component {
 
     }
 
-    render () {
-        let classNames = ['image-wrapper']
+    render() {
+        const {className, width, height, src, style, ...others} = this.props
+        const classes = classNames({
+            '_namespace': true,
+            'image-wrapper': true,
+            [className]: className
+        })
 
-        if (this.props.className) {
-            classNames = classNames.concat(this.props.className.split(' '))
-        }
-
-        let wrapperWidth = this.props.width
-        let wrapperHeight = this.props.height
+        let wrapperWidth = width
+        let wrapperHeight = height
         let wrapperStyle = {}
 
         if (this.state.imageWidth > this.state.imageHeight) {
             wrapperStyle = {
-                backgroundImage: 'url(' + this.props.src + ')',
+                backgroundImage: 'url(' + src + ')',
                 backgroundSize: 'auto ' + wrapperHeight + 'px',
                 backgroundPosition: '-' + ((this.state.imageWidth * wrapperWidth / this.state.imageHeight - wrapperWidth) / 2) + 'px 0px',
                 backgroundRepeat: 'no-repeat',
@@ -45,7 +46,7 @@ export default class Image extends React.Component {
         }
         else {
             wrapperStyle = {
-                backgroundImage: 'url(' + this.props.src + ')',
+                backgroundImage: 'url(' + src + ')',
                 backgroundSize: wrapperWidth + 'px',
                 backgroundPosition: '0px -' + ((this.state.imageHeight * wrapperWidth / this.state.imageWidth - wrapperWidth) / 2) + 'px',
                 backgroundRepeat: 'no-repeat',
@@ -54,11 +55,14 @@ export default class Image extends React.Component {
             }
         }
 
-        Object.assign(wrapperStyle, this.props.style)
+        Object.assign(wrapperStyle, style)
 
         return (
-            <div className={classnames.apply(null, classNames)} style={wrapperStyle}>
-                <img onLoad={this.onImageLoad.bind(this)} style={{display: 'none'}} src={this.props.src}/>
+            <div {...others} className={classes}
+                             style={wrapperStyle}>
+                <img onLoad={this.onImageLoad.bind(this)}
+                     style={{display: 'none'}}
+                     src={this.props.src}/>
             </div>
         )
     }
