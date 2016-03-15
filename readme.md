@@ -4,5 +4,5 @@
 ---
 
 ````jsx
-fis3 install gitlab:tb-component/fit-image
+npm install fit-image
 ````
