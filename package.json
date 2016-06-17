@@ -1,6 +1,6 @@
 {
   "name": "fit-image",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "tb image wrapper",
   "main": "lib/index.js",
   "scripts": {
@@ -15,10 +15,6 @@
   ],
   "author": "tieba",
   "license": "ISC",
-  "dependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "classnames": "^2.2.3"
-  },
+  "dependencies": {},
   "typings": "lib/index.d.ts"
 }
